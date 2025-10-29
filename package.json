@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "prepare": "husky",
-    "release": "standard-version"
+    "release": "standard-version",
+    "push": "git push --follow-tags"
   },
   "dependencies": {
     "react": "19.2.0",
