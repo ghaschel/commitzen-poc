@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const versionrc = require("../.versionrc.js");
+const { execSync } = require("child_process");
 
 const { infile, header } = versionrc;
 
@@ -68,3 +69,15 @@ fs.writeFileSync(changelogPath, newIndex, "utf8");
 console.log(
   `✅ Extracted full changelog for ${version} → changelogs/${version}.md and updated index.`
 );
+
+try {
+  // stage the new version file
+  execSync(`git add ${versionFile}`);
+
+  // amend into the current commit (no message change)
+  execSync(`git commit --amend --no-edit`);
+
+  console.log(`✅ Amended changelog ${versionFile} into the current commit`);
+} catch (err) {
+  console.error("⚠️  Failed to amend changelog into commit:", err.message);
+}
