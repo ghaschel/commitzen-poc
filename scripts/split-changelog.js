@@ -9,7 +9,10 @@ if (!fs.existsSync(changelogsDir)) fs.mkdirSync(changelogsDir);
 const content = fs.readFileSync(changelogPath, "utf8");
 
 // match the latest version section (from standard-version output)
-const versionMatch = content.match(/## \[?([\d.]+)\]? - (\d{4}-\d{2}-\d{2})/);
+const versionMatch = content.match(
+  /#{2,3}\s*\[?v?([\d.]+)\]?.*?(\d{4}-\d{2}-\d{2})/im
+);
+
 if (!versionMatch) {
   console.warn("⚠️  No version section found in changelog.");
   process.exit(0);
