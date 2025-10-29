@@ -4,6 +4,20 @@ const versionrc = require("../.versionrc.js");
 
 const { infile, header } = versionrc;
 
+const changelogPath = path.resolve(infile);
+const changelogsDir = path.resolve("changelogs");
+
+if (!fs.existsSync(changelogsDir)) fs.mkdirSync(changelogsDir);
+
+const content = fs.existsSync(changelogPath)
+  ? fs.readFileSync(changelogPath, "utf8")
+  : "";
+
+if (!content.trim()) {
+  console.warn(`⚠️  ${infile} is empty or missing.`);
+  process.exit(0);
+}
+
 // Grab the first version section including everything after it until "# Changelog Index" or EOF
 const versionSectionRegex =
   /^(#{2,3}\s*\[?v?(\d+\.\d+\.\d+)\]?.*?\(\d{4}-\d{2}-\d{2}\))([\s\S]*?)(?=\n# Changelog Index|\Z)/m;
@@ -18,7 +32,7 @@ const version = match[2];
 const sectionContent = `${header}${match[0].trim()}`;
 
 // write the full section to a version file
-const versionFile = path.join(path.dirname(infile), `${version}.md`);
+const versionFile = path.join(changelogsDir, `${version}.md`);
 fs.writeFileSync(versionFile, sectionContent + "\n", "utf8");
 
 // rebuild index
