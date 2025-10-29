@@ -26,7 +26,7 @@ if (!match) {
 }
 
 const version = match[2];
-const sectionContent = match[0].trim();
+const sectionContent = `# Changelog\n\n${match[0].trim()}`;
 
 // write the full section to a version file
 const versionFile = path.join(changelogsDir, `${version}.md`);
