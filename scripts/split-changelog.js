@@ -3,7 +3,7 @@ const path = require("path");
 const versionrc = require("../.versionrc.js");
 const { execSync } = require("child_process");
 
-const { infile } = versionrc;
+const { infile, header } = versionrc;
 
 const changelogPath = path.resolve(infile);
 const changelogsDir = path.resolve("changelogs");
@@ -41,7 +41,7 @@ if (firstMatch) {
   }
 
   version = match[1];
-  sectionContent = `${match[0].trim()}`;
+  sectionContent = `${header}${match[0].trim()}`;
 
   // if only header exists, add placeholder
   if (
