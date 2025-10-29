@@ -21,7 +21,7 @@ if (!content.trim()) {
 
 // --- Initial release detection ---
 const firstReleaseRegex =
-  /^# Changelog\s*\n+##\s*\[?v?(\d+\.\d+\.\d+)\]?.*?\((\d{4}-\d{2}-\d{2})\)\s*$/m;
+  /^# Changelog\s*\n+#{2,3}\s*\[?v?(\d+\.\d+\.\d+)\]?.*?\((\d{4}-\d{2}-\d{2})\)\s*$/m;
 const firstMatch = firstReleaseRegex.exec(content);
 
 let version, sectionContent;

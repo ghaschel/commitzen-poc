@@ -85,24 +85,45 @@ if (!content.trim()) {
   process.exit(0);
 }
 
-// Grab the first version section including everything after it until "# Changelog Index" or EOF
-const versionSectionRegex =
-  /^(#{2,3}\s*\[?v?(\d+\.\d+\.\d+)\]?.*?\(\d{4}-\d{2}-\d{2}\))([\s\S]*?)(?=\n# Changelog Index|\Z)/m;
-const match = versionSectionRegex.exec(content);
+// --- Initial release detection ---
+const firstReleaseRegex =
+  /^# Changelog\s*\n+#{2,3}\s*\[?v?(\d+\.\d+\.\d+)\]?.*?\((\d{4}-\d{2}-\d{2})\)\s*$/m;
+const firstMatch = firstReleaseRegex.exec(content);
 
-if (!match) {
-  console.warn("⚠️  No version section found in changelog.");
-  process.exit(0);
+let version, sectionContent;
+
+if (firstMatch) {
+  version = firstMatch[1];
+  sectionContent = `${firstMatch[0].trim()}\n\n*No changes yet*\n`;
+} else {
+  // --- Normal release extraction ---
+  const versionSectionRegex =
+    /^[\r\n]*#{2,3}\s*\[?v?(\d+\.\d+\.\d+)\]?.*?\((\d{4}-\d{2}-\d{2})\)([\s\S]*?)(?=\n# Changelog Index|\Z)/m;
+  const match = versionSectionRegex.exec(content);
+
+  if (!match) {
+    console.warn("⚠️  No version section found in changelog.");
+    process.exit(0);
+  }
+
+  version = match[1];
+  sectionContent = `${header}${match[0].trim()}`;
+
+  // if only header exists, add placeholder
+  if (
+    /^#{2,3}\s*\[?v?\d+\.\d+\.\d+\]?.*?\(\d{4}-\d{2}-\d{2}\)$/m.test(
+      sectionContent
+    )
+  ) {
+    sectionContent += "\n\n*No changes yet*\n";
+  }
 }
 
-const version = match[2];
-const sectionContent = `${header}${match[0].trim()}`;
-
-// write the full section to a version file
+// --- Write per-version file ---
 const versionFile = path.join(changelogsDir, `${version}.md`);
 fs.writeFileSync(versionFile, sectionContent + "\n", "utf8");
 
-// rebuild index
+// --- Rebuild index ---
 const files = fs.readdirSync(changelogsDir).filter((f) => f.endsWith(".md"));
 
 function readDate(filePath) {
@@ -136,14 +157,13 @@ console.log(
   `✅ Extracted full changelog for ${version} → changelogs/${version}.md and updated index.`
 );
 
+// --- Stage & amend into current commit ---
 try {
-  // stage the new version file
-  execSync(`git add ${versionFile}`);
-
-  // amend into the current commit (no message change)
+  execSync(`git add ${versionFile} ${changelogPath}`);
   execSync(`git commit --amend --no-edit`);
-
-  console.log(`✅ Amended changelog ${versionFile} into the current commit`);
+  console.log(
+    `✅ Amended changelog ${versionFile} and index into the current commit`
+  );
 } catch (err) {
   console.error("⚠️  Failed to amend changelog into commit:", err.message);
 }
