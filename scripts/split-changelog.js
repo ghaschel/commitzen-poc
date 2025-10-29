@@ -3,7 +3,7 @@ const path = require("path");
 const versionrc = require("../.versionrc.js");
 const { execSync } = require("child_process");
 
-const { infile, header } = versionrc;
+const { infile } = versionrc;
 
 const changelogPath = path.resolve(infile);
 const changelogsDir = path.resolve("changelogs");
@@ -28,7 +28,7 @@ let version, sectionContent;
 
 if (firstMatch) {
   version = firstMatch[1];
-  sectionContent = `${header}${firstMatch[0].trim()}\n\n*No changes yet*\n`;
+  sectionContent = `${firstMatch[0].trim()}\n\n*No changes yet*\n`;
 } else {
   // --- Normal release extraction ---
   const versionSectionRegex =
@@ -41,7 +41,7 @@ if (firstMatch) {
   }
 
   version = match[1];
-  sectionContent = `${header}${match[0].trim()}`;
+  sectionContent = `${match[0].trim()}`;
 
   // if only header exists, add placeholder
   if (
