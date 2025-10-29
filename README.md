@@ -46,7 +46,7 @@ export default {
 };
 ```
 
-create .versionrc.js and add this:
+create .versionrc.js and add this
 
 ```js
 const path = require("path");
