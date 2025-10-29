@@ -60,3 +60,19 @@ module.exports = {
   },
 };
 ```
+
+add this script to package.json:
+
+```json
+"scripts": {
+  "release": "standard-version"
+}
+```
+
+run this command to create the changelog folder structure:
+
+```bash
+mkdir changelogs
+```
+
+run `npx husky init` to initialize husky and add any relevant hooks.
