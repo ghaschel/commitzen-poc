@@ -1,0 +1,9 @@
+# Changelog
+
+
+### 0.1.1 (2025-10-29)
+
+
+### Features
+
+* **layout:** added hello feature ([4938aa0](https://github.com/ghaschel/commitzen-poc/commit/4938aa0fd36d097fb558030a0834e4774456550b))
