@@ -1,5 +1,6 @@
 # Changelog Index
 
+- [2.1.1](./changelogs/2.1.1.md) — 2025-10-29
 - [2.1.0](./changelogs/2.1.0.md) — 2025-10-29
 - [2.0.0](./changelogs/2.0.0.md) — 2025-10-29
 - [1.3.0](./changelogs/1.3.0.md) — 2025-10-29
