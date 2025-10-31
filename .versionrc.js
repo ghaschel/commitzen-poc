@@ -5,6 +5,7 @@ module.exports = {
   infile: "CHANGELOG.md",
   header: "# Changelog\n\n",
   scripts: {
-    postchangelog: "node scripts/split-changelog.js",
+    postchangelog: "node scripts/split-changelog.mjs",
   },
+  // releaseCount: 0,
 };
