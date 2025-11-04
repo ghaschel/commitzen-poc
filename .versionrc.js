@@ -2,8 +2,10 @@ module.exports = {
   skip: { tag: false },
   infile: "CHANGELOG.md",
   header: "# Changelog\n\n",
+  releaseCommitMessageFormat: "chore(release): v{{currentTag}}",
   scripts: {
     postchangelog: "node scripts/split-changelog.mjs",
+    posttag: "node scripts/custom-tag-message.mjs",
   },
   issuePrefixes: ["INSE-"],
   issueUrlFormat: "https://linear.app/ae-studio/issue/{{prefix}}{{id}}",
