@@ -58,5 +58,7 @@ module.exports = {
     // Disable preview and confirmation entirely
     skipEmptyScopes: true,
     enableMultipleScopes: false,
+    confirmColorize: false,
+    confirmCommit: false,
   },
 };
