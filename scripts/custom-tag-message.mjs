@@ -33,40 +33,60 @@ const extractText = (node) => {
   return "";
 };
 
-const mdastToPlainText = (markdown) => {
+const extractChangelogContent = (markdown) => {
   const tree = remark().use(remarkParse).parse(markdown);
 
-  const lines = [];
+  let date = "";
+  const contentLines = [];
+  let skipNextHeading = false;
 
   for (const node of tree.children) {
-    if (node.type === "heading") {
+    if (node.type === "heading" && node.depth === 1) {
+      // Skip the main "Changelog" heading
+      skipNextHeading = true;
+      continue;
+    }
+
+    if (node.type === "heading" && node.depth === 2) {
+      // Extract date from version heading like "2.11.0 (2025-11-04)"
       const text = extractText(node);
-      lines.push("\n" + text + "\n");
-    } else if (node.type === "paragraph") {
+      const dateMatch = text.match(/\((\d{4}-\d{2}-\d{2})\)/);
+      if (dateMatch) {
+        date = dateMatch[1];
+      }
+      // Skip the version heading itself
+      continue;
+    }
+
+    if (node.type === "heading" && node.depth === 3) {
+      // Section headings like "Features", "Bug Fixes"
       const text = extractText(node);
-      lines.push(text);
+      contentLines.push("\n" + text);
     } else if (node.type === "list") {
       for (const item of node.children) {
         const text = extractText(item);
-        lines.push("- " + text.trim());
+        contentLines.push("- " + text.trim());
       }
-    } else if (node.type === "code" || node.type === "blockquote") {
+    } else if (node.type === "paragraph") {
       const text = extractText(node);
-      lines.push(text);
+      if (text.trim()) {
+        contentLines.push(text);
+      }
     }
   }
 
-  return lines.join("\n").trim();
+  return { date, content: contentLines.join("\n").trim() };
 };
 
-const plainText = mdastToPlainText(changelogContent);
+const { date, content } = extractChangelogContent(changelogContent);
 
 // Build the tag message
 const tagMessage = `chore(release): v${version}
 
-# Changelog
+${date}
 
-${plainText.trim()}`;
+${content}
+`;
 
 // Delete the existing tag and recreate it with the custom message
 const tagName = `v${version}`;
