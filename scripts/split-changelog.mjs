@@ -186,7 +186,7 @@ console.log(
 // Note: postchangelog runs BEFORE the commit is created by commit-and-tag-version,
 // so we just need to stage the files and they'll be automatically included
 try {
-  execSync(`git add ${changelogsDir} ${changelogPath}`);
+  execSync(`git add .`);
   console.log(
     `✅ Staged split changelog files to be included in release commit.`
   );
