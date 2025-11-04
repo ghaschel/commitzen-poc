@@ -1,3 +1,14 @@
+const path = require("path");
+const { issuePrefixes } = require(path.resolve(".versionrc.js"));
+
+const getExampleIssueRefs = () => {
+  const exampleNumber = 123;
+
+  return issuePrefixes
+    .map((prefix, i) => `${prefix}${exampleNumber + i}`)
+    .join(", ");
+};
+
 module.exports = {
   extends: ["@commitlint/config-conventional"],
   rules: {
@@ -20,15 +31,9 @@ module.exports = {
       ],
     ],
   },
-  // ✅ cz-git configuration
   prompt: {
     messages: {
-      type: "Yo! What kinda change we makin'?",
-      subject: "Hit me with a quick summary:",
-      body: "Add some extra deets (optional):",
-      breaking: "BREAKIN' things? Tell me:",
-      footer:
-        'Any issues to close? (enter refs like "LINEAR-123" or just press enter to skip):',
+      footer: `List any ISSUES AFFECTED by this change. E.g.: ${getExampleIssueRefs()}`,
     },
     types: [
       { value: "feat", name: "✨ feat: A new feature" },
