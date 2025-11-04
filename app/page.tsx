@@ -43,6 +43,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
+            <span>new nice feature</span>
             <Image
               className="dark:invert"
               src="/vercel.svg"
