@@ -1,3 +1,5 @@
+import { execSync } from "child_process";
+
 // --- Stage files and amend the release commit ---
 try {
   execSync(`git add ${changelogsDir} ${changelogPath}`);
