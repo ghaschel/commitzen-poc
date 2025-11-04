@@ -37,6 +37,7 @@ if (!content.trim()) {
 
 // --- Parse Markdown ---
 const tree = remark().use(remarkParse).parse(content);
+console.log("test");
 
 // --- Collect version sections ---
 const sections = [];
