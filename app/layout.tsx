@@ -29,6 +29,7 @@ export default function RootLayout({
       >
         {children}
         <span>This is a new feature XYZ</span>
+        <span>this is a new feature ABC</span>
       </body>
     </html>
   );
