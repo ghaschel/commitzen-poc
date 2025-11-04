@@ -5,6 +5,7 @@ module.exports = {
   releaseCommitMessageFormat: "chore(release): v{{currentTag}}",
   scripts: {
     postchangelog: "node scripts/split-changelog.mjs",
+    precommit: "node scripts/pre-commit.mjs",
     posttag: "node scripts/custom-tag-message.mjs",
   },
   issuePrefixes: ["INSE-"],
