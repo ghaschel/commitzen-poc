@@ -182,14 +182,14 @@ console.log(
   `📝 Updated ${infile} with index of ${files.length} total version(s)\n`
 );
 
-// --- Stage files and amend the release commit ---
+// --- Stage files to be included in the release commit ---
+// Note: postchangelog runs BEFORE the commit is created by commit-and-tag-version,
+// so we just need to stage the files and they'll be automatically included
 try {
   execSync(`git add ${changelogsDir} ${changelogPath}`);
-  console.log(`✅ Staged split changelog files for release commit.`);
-
-  // Amend the commit to include the changelog files without changing the message
-  execSync(`git commit --amend --no-edit`, { stdio: "inherit" });
-  console.log(`✅ Amended release commit to include split changelog files.`);
+  console.log(
+    `✅ Staged split changelog files to be included in release commit.`
+  );
 } catch (err) {
-  console.error("⚠️  Failed to amend commit:", err.message);
+  console.error("⚠️  Failed to stage files:", err.message);
 }
