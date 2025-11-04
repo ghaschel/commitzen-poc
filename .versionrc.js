@@ -7,4 +7,6 @@ module.exports = {
   scripts: {
     postchangelog: "node scripts/split-changelog.mjs",
   },
+  issuePrefixes: ["INSE-"],
+  issueUrlFormat: "https://linear.app/ae-studio/issue/{{prefix}}{{id}}",
 };

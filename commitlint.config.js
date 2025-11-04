@@ -1,10 +1,61 @@
 module.exports = {
-  extends: ['@commitlint/config-conventional'],
+  extends: ["@commitlint/config-conventional"],
   rules: {
-    'type-enum': [
+    "type-enum": [
       2,
-      'always',
-      ['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'improvement', 'perf', 'refactor', 'revert', 'style', 'test'],
+      "always",
+      [
+        "build",
+        "chore",
+        "ci",
+        "docs",
+        "feat",
+        "fix",
+        "improvement",
+        "perf",
+        "refactor",
+        "revert",
+        "style",
+        "test",
+      ],
     ],
+  },
+  // ✅ cz-git configuration
+  prompt: {
+    messages: {
+      type: "Yo! What kinda change we makin'?",
+      subject: "Hit me with a quick summary:",
+      body: "Add some extra deets (optional):",
+      breaking: "BREAKIN' things? Tell me:",
+      footer: 'Got issues to link? (y/n then enter issue refs like "LINEAR-123"):',
+      footerPrefixesSelect: "Select the type of issue:",
+      confirmCommit: "This look clean to you?",
+    },
+    types: [
+      { value: "feat", name: "✨ feat: A new feature" },
+      { value: "fix", name: "🐞 fix: A bug fix" },
+      { value: "docs", name: "📝 docs: Documentation only changes" },
+      { value: "style", name: "💅 style: Code style / formatting only" },
+      {
+        value: "refactor",
+        name: "♻️ refactor: Code change that isn't a fix or a feature",
+      },
+      { value: "perf", name: "⚡ perf: Performance improvement" },
+      { value: "test", name: "✅ test: Adding or correcting tests" },
+      { value: "build", name: "📦 build: Build system changes" },
+      { value: "ci", name: "🔧 ci: CI configuration changes" },
+      {
+        value: "chore",
+        name: "🧹 chore: Build process or auxiliary tool changes",
+      },
+      { value: "revert", name: "⏪ revert: Revert a previous commit" },
+      { value: "improvement", name: "🚀 improvement: An improvement" },
+    ],
+    skipQuestions: ["scope", "footerPrefix", "footer"],
+    allowBreakingChanges: ["feat", "fix"],
+    useEmoji: false,
+    confirmColorize: true,
+    maxHeaderLength: 100,
+    maxSubjectLength: 100,
   },
 };
