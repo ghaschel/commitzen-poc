@@ -7,5 +7,4 @@ module.exports = {
   scripts: {
     postchangelog: "node scripts/split-changelog.mjs",
   },
-  // releaseCount: 0,
 };
