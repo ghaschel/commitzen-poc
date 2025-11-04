@@ -1,5 +1,6 @@
 # Changelog Index
 
+- [2.13.0](./changelogs/2.13.0.md)
 - [2.12.0](./changelogs/2.12.0.md)
 - [2.11.0](./changelogs/2.11.0.md)
 - [2.10.0](./changelogs/2.10.0.md)

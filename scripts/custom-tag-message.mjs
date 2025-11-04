@@ -86,7 +86,8 @@ const tagMessage = `chore(release): v${version}
 ${date}
 
 ${content}
-`;
+
+ `;
 
 // Delete the existing tag and recreate it with the custom message
 const tagName = `v${version}`;
