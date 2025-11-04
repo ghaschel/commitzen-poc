@@ -1,3 +1,13 @@
+# Changelog
+
+
+## [2.19.0](https://github.com/ghaschel/commitzen-poc/compare/v2.18.0...v2.19.0) (2025-11-04)
+
+
+### Features
+
+* test ([7f00548](https://github.com/ghaschel/commitzen-poc/commit/7f00548be625ee58799181cc223f41df67c394d3))
+
 # Changelog Index
 
 - [2.18.0](./changelogs/2.18.0.md)
