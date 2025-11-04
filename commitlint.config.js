@@ -27,9 +27,8 @@ module.exports = {
       subject: "Hit me with a quick summary:",
       body: "Add some extra deets (optional):",
       breaking: "BREAKIN' things? Tell me:",
-      footer: 'Got issues to link? (y/n then enter issue refs like "LINEAR-123"):',
-      footerPrefixesSelect: "Select the type of issue:",
-      confirmCommit: "This look clean to you?",
+      footer:
+        'Any issues to close? (enter refs like "LINEAR-123" or just press enter to skip):',
     },
     types: [
       { value: "feat", name: "✨ feat: A new feature" },
@@ -51,11 +50,13 @@ module.exports = {
       { value: "revert", name: "⏪ revert: Revert a previous commit" },
       { value: "improvement", name: "🚀 improvement: An improvement" },
     ],
-    skipQuestions: ["scope", "footerPrefix", "footer"],
+    skipQuestions: ["scope", "footerPrefix", "confirmCommit"],
     allowBreakingChanges: ["feat", "fix"],
     useEmoji: false,
-    confirmColorize: true,
     maxHeaderLength: 100,
     maxSubjectLength: 100,
+    // Disable preview and confirmation entirely
+    skipEmptyScopes: true,
+    enableMultipleScopes: false,
   },
 };
