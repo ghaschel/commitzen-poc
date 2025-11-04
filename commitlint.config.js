@@ -55,10 +55,7 @@ module.exports = {
     useEmoji: false,
     maxHeaderLength: 100,
     maxSubjectLength: 100,
-    // Disable preview and confirmation entirely
     skipEmptyScopes: true,
     enableMultipleScopes: false,
-    confirmColorize: false,
-    confirmCommit: false,
   },
 };
