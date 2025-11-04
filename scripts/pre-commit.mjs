@@ -10,7 +10,7 @@ const changelogsDir = path.resolve("changelogs");
 
 // --- Stage files and amend the release commit ---
 try {
-  execSync(`git add ${changelogsDir} ${changelogPath}`);
+  execSync(`git add .`);
   console.log(`✅ Staged split changelog files for release commit.`);
 
   // Amend the commit to include the changelog files without changing the message
