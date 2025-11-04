@@ -7,5 +7,5 @@ try {
   execSync(`git commit --amend --no-edit`, { stdio: "inherit" });
   console.log(`✅ Amended release commit to include split changelog files.`);
 } catch (err) {
-  console.error("⚠️  Failed to amend commit:", err.message);
+  console.error("⚠️  Failed to amsend commit:", err.message);
 }
