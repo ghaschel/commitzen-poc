@@ -30,6 +30,8 @@ module.exports = {
         "test",
       ],
     ],
+    // Enforce lowercase subject (auto-converted by husky hook)
+    "subject-case": [2, "always", "lower-case"],
   },
   prompt: {
     messages: {
